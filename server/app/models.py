@@ -3,6 +3,8 @@ from app import db
 from app import login_manager
 from flask_login import UserMixin
 
+### START OF USER MODEL CODE + AUXILIARY FUNCTIONS ###
+
 class User(UserMixin, db.Model):
     __tablename__ = 'user'
 
@@ -13,10 +15,10 @@ class User(UserMixin, db.Model):
     authenticated = db.Column(db.Boolean, default = False)
     
     def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.password = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+        return check_password_hash(self.password, password)
 
     def is_active(self):
         """True, as all users are active."""
@@ -35,12 +37,22 @@ class User(UserMixin, db.Model):
         return False
 
 @login_manager.user_loader
-def user_loader(id):
-    """Given *user_id*, return the associated User object.
+def user_loader(user_id):
+    """Given *user_id*, return the associated User object."""
+    return User.query.get(user_id)
 
-    :param unicode user_id: user_id (email) user to retrieve
+### END OF USER MODEL CODE ###
 
-    """
-    return User.query.get(int(id))
+### START OF CODE FOR ALL OTHER MODELS ###
+
+class Workout(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+
+class Session(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
 
 
+class Exercise(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)

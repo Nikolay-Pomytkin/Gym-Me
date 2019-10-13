@@ -1,7 +1,8 @@
-from app import app
-from flask import render_template, redirect
-from flask_login import login_required, current_user
+from app import app, db
+from flask import render_template, redirect, url_for
+from flask_login import login_required, current_user, login_user
 from app.forms import RegistrationForm, LoginForm
+from app.models import User
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -16,6 +17,7 @@ def index():
                 db.session.add(user)
                 db.session.commit()
                 login_user(user, remember=True)
+                print('user logged in')
                 return redirect(url_for("index"))
     return render_template('index.html', form=form)
 
@@ -30,23 +32,6 @@ def register():
         return redirect(url_for('/'))
     return render_template('register.html', form=form)
 
-# @app.route("/login", methods=["GET", "POST"])
-# def login():
-#     """
-#     For GET requests, display the login form. 
-#     For POSTS, login the current user by processing the form.
-#     """
-#     form = LoginForm()
-#     if form.validate_on_submit():
-#         user = User.query.get(form.email.data)
-#         if user:
-#             if bcrypt.check_password_hash(user.password, form.password.data):
-#                 user.authenticated = True
-#                 db.session.add(user)
-#                 db.session.commit()
-#                 login_user(user, remember=True)
-#                 return redirect(url_for("index"))
-#     return render_template("login.html", form=form)
 
 @app.route("/logout", methods=["GET"])
 @login_required
