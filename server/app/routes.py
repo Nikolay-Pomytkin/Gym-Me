@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template, redirect
-from flask_login import login_required
+from flask_login import login_required, current_user
+from app.forms import RegistrationForm, LoginForm
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -27,6 +28,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('/'))
+    return render_template('register.html', form=form)
 
 # @app.route("/login", methods=["GET", "POST"])
 # def login():
