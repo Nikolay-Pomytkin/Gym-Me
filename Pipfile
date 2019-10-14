@@ -13,6 +13,7 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-login = "*"
 flask-wtf = "*"
+flask-bootstrap = "*"
 
 [requires]
 python_version = "3"
