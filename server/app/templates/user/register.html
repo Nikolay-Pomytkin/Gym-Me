@@ -4,33 +4,31 @@
 <div class="container-fluid">
 
   <!-- Spacing between navbar and card -->
-  <div class="row mb-5"></div>
-
-  <div class="row">
+  <div class="row" style="margin-top:2.5%">
 
     <div class="offset-md-4 col-md-4">
-      <div class="card bg-light mb-3">
+      <div class="card">
+        <div class="card-header text-center">
+          <h1>Create an Account</h1>
+        </div>
         <div class="card-body">
 
           <form action="" method="post">
             {{ form.hidden_tag() }}
 
-            <fieldset>
-              <legend>Create an Account</legend>
-
               <!-- NAME -->
-              <div class="form-group">
+              <div class="form-group" style="margin-bottom:0px;">
                 {{ form.username.label }} <br>
-                {{ form.username(size=32) }} <br>
+                {{ form.username(class="form-control") }} <br>
                 {% for error in form.username.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
               </div>
 
               <!-- EMAIL -->
-              <div class="form-group">
+              <div class="form-group" style="margin-bottom:0px;">
                 {{ form.email.label }} <br>
-                {{ form.email(size=32) }} <br>
+                {{ form.email(class="form-control") }} <br>
                 <small id="emailHelp" class="form-text text-muted">
                   We'll never share your email with anyone else.
                 </small>
@@ -40,27 +38,25 @@
               </div>
 
               <!-- PASSWORD -->
-              <div class="form-group">
+              <div class="form-group" style="margin-bottom:0px;">
                 {{ form.password.label }} <br>
-                {{ form.password(size=32) }} <br>
+                {{ form.password(class="form-control") }} <br>
                 {% for error in form.password.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
               </div>
 
               <!-- REPEAT PASSWORD -->
-              <div class="form-group">
+              <div class="form-group" style="margin-bottom:0px;">
                 {{ form.password2.label }} <br>
-                {{ form.password2(size=32) }} <br>
+                {{ form.password2(class="form-control") }} <br>
                 {% for error in form.password2.errors %}
                 <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
               </div>
 
               <!-- Submit Button -->
-              {{ form.submit(class="btn btn-primary") }}
-
-            </fieldset>
+              {{ form.submit(class="btn btn-primary", style="width:100%;") }}
 
           </form>
 
