@@ -1,5 +1,5 @@
 from app import app, db
-from flask import render_template, redirect, url_for
+from flask import render_template, redirect, url_for, flash
 from flask_login import login_required, current_user, login_user, logout_user
 from app.forms import RegistrationForm, LoginForm
 from app.models import User
@@ -7,8 +7,8 @@ from app.models import User
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
-        return render_template('home.html')
-    return render_template('index.html', form=form)
+        return render_template('base/index.html')
+    return render_template('base/home.html')
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -39,9 +39,13 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
             login_user(user, remember=True)
+            flash('Successfully logged in!')
             return redirect(url_for("index"))
-    return render_template('user/login.html')
+    return render_template('user/login.html', form=form)
 
 @app.route('/workout/new',  methods=['GET', 'POST'])
 @login_required

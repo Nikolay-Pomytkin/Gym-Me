@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Font awesome icons import -->
+  <!-- <script src="https://use.fontawesome.com/0a48b1ee9a.js"></script> -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Font imports -->
+  <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://bootswatch.com/4/cosmo/bootstrap.min.css" crossorigin="anonymous">                
+  {% if title %}
+  <title>{{ title }} - Gym-Me</title>
+  {% else %}
+  <title>Welcome to Gym-Me</title>
+  {% endif %}
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="font-family: 'Oswald', sans-serif;">
+    
+    <span style="padding-left: 15%"></span>
+    <a class="navbar-brand" href="{{ url_for('index') }}" style="font-size: 1.6rem; padding-top:0px; padding-bottom:0px;">GYM-ME</a>
+    <button class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2"
+        id="navbarNavDropdown"
+        style="padding-right: 15%">
+      
+      <ul class="navbar-nav ml-auto">
+      {% if current_user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Analytics</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Explore</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown link
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+      {% else %}
+        <li class="nav-item active" style="margin-right:3px; font-size:1.4rem; padding:0px;">
+            <a style="font-size:1.4rem; padding-bottom: 3px; padding-top: 3px;border:1px solid white;" class="nav-link btn btn-success" href="{{ url_for('login') }}"><i class="fas fa-sign-in-alt"></i> Log in</a>
+        </li>
+        <li class="nav-item active" style="margin-left:3px;">
+            <a style="font-size:1.4rem; padding-bottom: 3px; padding-top: 3px;border:1px solid white;" class="nav-link btn btn-info" href="{{ url_for('register') }}"><i class="fas fa-user-plus"></i> Sign up</a>
+        </li>
+      {% endif %}
+      </ul>
+
+    </div>
+
+  </nav>
+  <!-- END NAVBAR -->
+
+  <!-- Message flash code -->
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <!-- Render internal template contents -->
+  {% block content %}{% endblock %}
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous">
+  </script>
+  <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous">
+  </script>
+  <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous">
+  </script>
+</body>
+</html>
