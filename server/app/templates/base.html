@@ -78,17 +78,25 @@
 
   <!-- Message flash code -->
   {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul>
-      {% for message in messages %}
-      <li>{{ message }}</li>
-      {% endfor %}
-  </ul>
-  {% endif %}
+    {% if messages %}
+        {% for message, status in messages %}
+          <div class="alert alert-{{status}}" style="width:70%; margin-top:1%; margin-left:15%">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+    {% endif %}
   {% endwith %}
 
   <!-- Render internal template contents -->
   {% block content %}{% endblock %}
+
+  <!-- Allow flash messages to be closed out -->
+  <script>
+    $('.alert').alert()
+  </script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script

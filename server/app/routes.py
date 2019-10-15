@@ -43,7 +43,7 @@ def login():
             db.session.add(user)
             db.session.commit()
             login_user(user, remember=True)
-            flash('Successfully logged in!')
+            flash(('Successfully logged in!',"success"))
             return redirect(url_for("index"))
     return render_template('user/login.html', form=form)
 
