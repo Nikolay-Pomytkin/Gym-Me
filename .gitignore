@@ -1,2 +1,7 @@
 # vscode
 .vscode
+
+# migrations and sqlite database
+*.db
+*.pyc
+server/migrations
