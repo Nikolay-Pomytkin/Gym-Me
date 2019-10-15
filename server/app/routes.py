@@ -7,8 +7,8 @@ from app.models import User
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if current_user.is_authenticated:
-        return render_template('base/index.html')
-    return render_template('base/home.html')
+        return render_template('core/index.html')
+    return render_template('core/home.html')
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
@@ -58,5 +58,6 @@ def new_workout():
 @login_required
 def workout(workout_id, methods=['GET']):
     '''Display workout by id.'''
-    return ""
+    return render_template("workout/workout.html") 
+
 
