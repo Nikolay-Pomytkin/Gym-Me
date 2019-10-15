@@ -6,7 +6,8 @@
   <div class="offset-md-2 col-md-4">
     <div class="card">
       <div class="card-header">
-        <h3>Recent Workouts:</h3>
+        <div class="float-left" style="font-size:1.5rem;">Recent Sessions:</div>
+        <a class="btn btn-warning float-right text-white"><i class="fas fa-record-vinyl"></i> Record a session</a>
       </div>
       <div class="card-body">
 
@@ -16,7 +17,8 @@
   <div class="col-md-4">
     <div class="card">
       <div class="card-header">
-        <h3>Workout templates:</h3>
+        <div class="float-left" style="font-size:1.5rem;">Workout templates:</div>
+        <a class="btn btn-success float-right text-white" href="{{url_for('new_workout')}}"><i class="fas fa-plus-circle"></i> Create new template</a>
       </div>
       <div class="card-body">
 
