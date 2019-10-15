@@ -1,7 +1,7 @@
 from app import app, db
 from flask import render_template, redirect, url_for, flash
 from flask_login import login_required, current_user, login_user, logout_user
-from app.forms import RegistrationForm, LoginForm
+from app.forms import RegistrationForm, LoginForm, WorkoutForm
 from app.models import User
 
 @app.route('/', methods=['GET', 'POST'])
@@ -43,7 +43,7 @@ def login():
             db.session.add(user)
             db.session.commit()
             login_user(user, remember=True)
-            flash('Successfully logged in!')
+            flash(('Successfully logged in!',"success"))
             return redirect(url_for("index"))
     return render_template('user/login.html', form=form)
 
@@ -51,7 +51,8 @@ def login():
 @login_required
 def new_workout():
     '''Create a new workout.'''
-    return ""
+    form = WorkoutForm()
+    return render_template("workout/new_workout.html", form=form)
 
 @app.route('/workout/<workout_id>')
 @login_required
