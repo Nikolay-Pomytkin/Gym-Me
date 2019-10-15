@@ -3,22 +3,21 @@
 {% block content %}
 
 
-<div class="row">
+<div class="row" style="margin-top:2.5%;">
 
-  <div class="offset-md-4 col-md-4">
-    <div class="card bg-light mb-3">
+  <div class="offset-md-2 col-md-3">
+    <div class="card">
+      <div class="card-header text-center">
+        <h1>Welcome to Gym-Me!</h1>
+      </div>
       <div class="card-body">
 
-        <form action="" method="post">
+        <form action="" method="post" style="width:80%; margin-left:10%;">
           {{ form.hidden_tag() }}
-
-          <fieldset>
-            <legend>Log In</legend>
-
             <!-- EMAIL -->
             <div class="form-group">
               {{ form.email.label }} <br>
-              {{ form.email(size=32) }} <br>
+              {{ form.email(class="form-control") }} <br>
               {% for error in form.email.errors %}
               <span style="color: red;">[{{ error }}]</span>
               {% endfor %}
@@ -27,21 +26,35 @@
             <!-- PASSWORD -->
             <div class="form-group">
               {{ form.password.label }} <br>
-              {{ form.password(size=32) }} <br>
+              {{ form.password(class="form-control") }} <br>
               {% for error in form.password.errors %}
               <span style="color: red;">[{{ error }}]</span>
               {% endfor %}
             </div>
 
             <!-- Submit Button -->
-            {{ form.submit(class="btn btn-primary") }}
-
-          </fieldset>
+            {{ form.submit(class="btn btn-lg btn-primary", style="width:100%;") }}
 
         </form>
 
       </div>
+      <div class="card-footer text-center">
+        Don't have an account? <a href="{{ url_for('register') }}">Sign up</a><br/>
+        <a href="">Forgot your password?</a>
+      </div>
     </div>
   </div>
+
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header bg-primary text-center">
+        <h2 class="text-white"><b>An innovative approach to Fitness Tracking</b></h2>
+      </div>
+      <div class="card-body">
+          Gym-Me is redefining the way you track your fitness routines
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
